@@ -23,10 +23,10 @@ def cargar_archivos() -> Dict[str, pd.DataFrame]:
     """
     print("Leyendo archivos...")
     return {
-        'cobranza_recibo': pd.read_excel('./data/para_pruebas/cobranza_por_recibo.xlsx'),
-        'cobranza_factura': pd.read_excel('./data/para_pruebas/cobranza_por_factura.xlsx'),
-        'deudores_ventas': pd.read_excel('./data/para_pruebas/deudores_por_ventas.xlsx'),
-        'mayor_ppi': pd.read_excel('./data/para_pruebas/COBROS TOTALES (PPI y CHEQUES).xlsx'),
+        'cobranza_recibo': pd.read_excel('./data/para_pruebas/v1/cobranza por recibo.xlsx'),
+        'cobranza_factura': pd.read_excel('./data/para_pruebas/v1/cobranza por factura.xlsx'),
+        'deudores_ventas': pd.read_excel('./data/para_pruebas/v1/mayor de ds x vtas.xlsx'),
+        'mayor_ppi': pd.read_excel('./data/para_pruebas/v1/cobros totales.xlsx'),
         'detalle_de_recibos': pd.read_excel('./data/para_pruebas/Analisis financiero de cobranza por detalle de recibo.xlsx')
     }
 
@@ -47,7 +47,7 @@ def preprocesar_datos(dfs: Dict[str, pd.DataFrame]) -> Dict[str, pd.DataFrame]:
     dfs['deudores_ventas'] = extraer_numero_de_recibo(dfs['deudores_ventas'], 'Compr.Rel.')
     dfs['cobranza_factura'] = extraer_numero_de_factura(dfs['cobranza_factura'], 'Factura')
     dfs['detalle_de_recibos'] = extraer_numero_de_factura(dfs['detalle_de_recibos'], 'Comprobante')
-    dfs['detalle_de_recibos'] = extraer_numero_de_recibo(dfs['detalle_de_recibos'], 'Valor')
+    dfs['detalle_de_recibos'] = extraer_numero_de_recibo(dfs['detalle_de_recibos'], 'Recibo')
     
     # Conversión de tipos y selección de columnas
     dfs['deudores_ventas'] = dfs['deudores_ventas'][['nro_recibo', 'Asiento']].astype({'Asiento': 'str'})
